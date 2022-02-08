@@ -24,7 +24,6 @@ const Searchbar = ({ onSubmit }) => {
     if (searchQuery.trim() === '') {
       return toast('Please, fill in the field of search');
     }
-
     onSubmit(searchQuery);
     setSearchQuery('');
   };

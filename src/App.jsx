@@ -9,10 +9,11 @@ import { Button } from './components/ImageGallery/ImageGallery.style';
 import Loader from './components/Loader/Loader';
 import Modal from './components/Modal/Modal';
 
+const perPage = 12;
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(12);
+  // const [perPage, setPerPage] = useState(12);
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,8 @@ const App = () => {
 
   const handleFormSubmit = searchQuery => {
     setSearchQuery(searchQuery);
+    setPage(1);
+    setImages([]);
     console.log(searchQuery);
   };
 
@@ -50,6 +53,8 @@ const App = () => {
           if (data.hits.length === 0) {
             return toast.error('Sorry! Nothing was found for your query.');
           }
+          // if (searchQuery) {
+          // }
           // setPage(page => page + 1);
           // console.log(data.hits);
           // console.log(images);
@@ -99,6 +104,12 @@ const App = () => {
           <img src={largeImage} alt={tags} />
         </Modal>
       )}
+      {error && (
+        <p style={{ color: 'red', textAlign: 'center' }}>
+          "Failed to download, please try again"
+        </p>
+      )}
+
       <ToastContainer position="top-center" autoClose={2000} />
     </>
   );
